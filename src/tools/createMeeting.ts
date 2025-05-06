@@ -1,6 +1,7 @@
 import axios from "axios";
 import { CreateMeetingParams } from "../utils/types.js";
-import { fetchZoomAccessToken } from "../utils/zoomApi.js";
+import { accessToken } from "../utils/zoomApi.js";
+import { updateAccessToken } from "../utils/helper.js";
 
 export async function createZoomMeeting(params: CreateMeetingParams) {
   const {
@@ -14,7 +15,8 @@ export async function createZoomMeeting(params: CreateMeetingParams) {
   const endpoint = "https://api.zoom.us/v2/users/me/meetings";
 
   try {
-    const token = await fetchZoomAccessToken();
+
+    await updateAccessToken();
 
     const response = await axios.post(
       endpoint,
@@ -34,7 +36,7 @@ export async function createZoomMeeting(params: CreateMeetingParams) {
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken.token}`,
           "Content-Type": "application/json",
         },
       }

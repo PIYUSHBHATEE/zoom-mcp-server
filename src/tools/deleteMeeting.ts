@@ -1,15 +1,17 @@
 import axios from "axios";
-import { fetchZoomAccessToken } from "../utils/zoomApi.js";
+import { accessToken } from "../utils/zoomApi.js";
+import { updateAccessToken } from "../utils/helper.js";
 
 export async function deleteZoomMeeting({ id }: { id: string }) {
   const endpoint = `https://api.zoom.us/v2/meetings/${id}`;
 
   try {
-    const token = await fetchZoomAccessToken();
+
+    await updateAccessToken();
 
     await axios.delete(endpoint, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken.token}`,
         "Content-Type": "application/json",
       },
     });

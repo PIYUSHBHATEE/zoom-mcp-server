@@ -1,12 +1,14 @@
 import axios from "axios";
-import { fetchZoomAccessToken } from "../utils/zoomApi.js";
+import { accessToken } from "../utils/zoomApi.js";
+import { updateAccessToken } from "../utils/helper.js";
 
 export async function fetchMeetings() {
   try {
-    const token = await fetchZoomAccessToken();
+    await updateAccessToken();
+
     const response = await axios.get("https://api.zoom.us/v2/users/me/meetings", {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken.token}`,
       },
     });
     return response.data;

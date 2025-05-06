@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { fetchZoomAccessToken } from '../utils/zoomApi.js';
+import { accessToken } from '../utils/zoomApi.js';
 import { UpdateMeetingParams } from '../utils/types.js';
+import { updateAccessToken } from '../utils/helper.js';
 
 export async function updateZoomMeeting(params: UpdateMeetingParams) {
   if (!params.id) {
@@ -11,7 +12,9 @@ export async function updateZoomMeeting(params: UpdateMeetingParams) {
   const url = `https://api.zoom.us/v2/meetings/${id}`;
 
   try {
-    const token = await fetchZoomAccessToken();
+
+    await updateAccessToken();
+
     const response = await axios.patch(
       url,
       {
@@ -23,7 +26,7 @@ export async function updateZoomMeeting(params: UpdateMeetingParams) {
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken.token}`,
           'Content-Type': 'application/json',
         },
       }

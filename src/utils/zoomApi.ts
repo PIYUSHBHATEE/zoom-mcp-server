@@ -33,3 +33,11 @@ export async function fetchZoomAccessToken(): Promise<string> {
     throw new Error("Failed to retrieve Zoom access token.");
   }
 }
+
+export let accessToken: {
+  token: string,
+  lastUpdated: string
+} = {
+  token: '',
+  lastUpdated: ''
+};
