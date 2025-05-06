@@ -1,22 +1,23 @@
-import axios from 'axios';
-import { createMeetingParams } from '../utils/types.js';
-import { getZoomAccessToken } from '../utils/zoomApi.js';
+import axios from "axios";
+import { CreateMeetingParams } from "../utils/types.js";
+import { fetchZoomAccessToken } from "../utils/zoomApi.js";
 
-export async function createZoomMeeting(params: createMeetingParams) {
+export async function createZoomMeeting(params: CreateMeetingParams) {
   const {
     topic,
     start_time,
     duration = 30,
-    timezone = 'UTC',
-    agenda = '',
+    timezone = "UTC",
+    agenda = "",
   } = params;
 
-  const url = `https://api.zoom.us/v2/users/me/meetings`;
-  
+  const endpoint = "https://api.zoom.us/v2/users/me/meetings";
+
   try {
-    const token = await getZoomAccessToken(); 
+    const token = await fetchZoomAccessToken();
+
     const response = await axios.post(
-      url,
+      endpoint,
       {
         topic,
         type: 2,
@@ -34,14 +35,14 @@ export async function createZoomMeeting(params: createMeetingParams) {
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
 
     return response.data;
   } catch (error: any) {
-    console.error('Error creating Zoom meeting:', error.response?.data || error.message);
-    throw error;
+    console.error("Failed to create Zoom meeting:", error.response?.data || error.message);
+    throw new Error("Unable to create meeting");
   }
 }

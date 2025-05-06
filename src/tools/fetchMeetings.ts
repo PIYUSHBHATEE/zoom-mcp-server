@@ -1,18 +1,17 @@
-import axios from 'axios';
-import { getZoomAccessToken } from '../utils/zoomApi.js';
+import axios from "axios";
+import { fetchZoomAccessToken } from "../utils/zoomApi.js";
 
-async function get_meetings() {
+export async function fetchMeetings() {
   try {
-    const token = await getZoomAccessToken();
-    const response = await axios.get('https://api.zoom.us/v2/users/me/meetings', {
+    const token = await fetchZoomAccessToken();
+    const response = await axios.get("https://api.zoom.us/v2/users/me/meetings", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     return response.data;
-  } catch (err: any) {
-    return err.message;
+  } catch (error: any) {
+    console.error("Failed to fetch Zoom meetings:", error.response?.data || error.message);
+    return null;
   }
 }
-
-export default get_meetings;
