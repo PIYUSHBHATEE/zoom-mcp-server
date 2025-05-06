@@ -17,7 +17,7 @@
     "dev": "ts-node src/index.ts"
   },
   "author": "Prathamesh Mane",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.0",
     "@types/express": "^5.0.1",
