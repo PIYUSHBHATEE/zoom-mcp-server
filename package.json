@@ -1,11 +1,11 @@
 {
-  "name": "zoom-mcp-server",
+  "name": "@prathamesh0901/zoom-mcp-server",
   "version": "1.0.0",
   "description": "Zoom meetings mcp server.",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "zoom": "./dist/index.js"
+    "zoom": "dist/index.js"
   },
   "files": [
     "dist"
@@ -22,7 +22,6 @@
     "@modelcontextprotocol/sdk": "^1.11.0",
     "@types/express": "^5.0.1",
     "axios": "^1.9.0",
-    "body-parser": "^2.2.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "zod": "^3.24.3"
