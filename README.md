@@ -10,6 +10,16 @@ This server enables you to **create**, **update**, **delete**, and **retrieve** 
 
 To use this MCP server with Claude or Cursor, add the following to your MCP config file( Claude: `claude_desktop_config.json` | Cursor: `.cursor/mcp.json` ):
 
+### Step 1. Get Zoom Client ID, Zoom Client Secret and Account ID
+
+  1. visit [Zoom Marketplace](https://marketplace.zoom.us/)
+  2. Build App and choose **Server to Server OAuth App**
+  3. Add Scope > Meeting > Select All Meeting Permissions
+  4. Active your app
+    then you can get **Account ID**, **Client ID**, **Client Secret** in App Credentials page
+
+### Step 2. Config MCP Server
+
 ```json
 {
   "mcpServers": {
