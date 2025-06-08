@@ -1,6 +1,6 @@
 {
   "name": "@prathamesh0901/zoom-mcp-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Zoom meetings mcp server.",
   "main": "index.js",
   "type": "module",
